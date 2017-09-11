@@ -7,8 +7,6 @@ class HtmlAnalyzerTest extends TestCase {
     
     function testAnalyzer() {
         
-        $htmlFile = 'to_analyze.html';
-        
         $analyzer = new Analyzer;
         
         $analysis = $analyzer->analyze('<div class="foo"><img src="./puppy.png"><p><span>text</span></p></div>');
