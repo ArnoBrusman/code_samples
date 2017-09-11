@@ -12,11 +12,10 @@ class HtmlAnalyzerTest extends TestCase {
         $analyzer = new Analyzer;
         
         $analysis = $analyzer->analyze('<div class="foo"><img src="./puppy.png"><p><span>text</span></p></div>');
-        $analysis2 = $analyzer->analyze('<div></div><img src="./puppy.png" hidden visible=false >');
+        
         $nested = $analysis->getNodesNested();
         
         $this->assertTrue($analysis->isValid());
-        $this->assertTrue($analysis2->isValid());
         
         //test nested
         $this->assertEquals('div', $nested[0]['type']);

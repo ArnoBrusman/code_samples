@@ -16,26 +16,42 @@ class Analysis {
         $this->errors = $errors;
     }
     
+    /**
+     * Check if analyzed html was valid.
+     * @return boolean
+     */
     public function isValid()
     {
         return empty($this->errors);
     }
     
+    /**
+     * Returns errors given during analysis.
+     * @return array
+     */
     public function getErrors()
     {
         return $this->errors;
     }
     
+    /**
+     * Get all nodes.
+     * @return array
+     */
     public function getNodes()
     {
         return $this->nodes;
     }
     
+    /**
+     * Count nodes categorized by node type.
+     * @return array
+     */
     public function countTypes()
     {
         $types = [];
         
-        foreach ($this->nodes as $node) {
+        foreach ($this->getNodes() as $node) {
             if(isset($node['type'])) {
                 $types[$node['type']]++;
             } else {
@@ -88,16 +104,18 @@ class Analysis {
         return $nested;
     }
     
+    /**
+     * Returns an array of image sources.
+     * @return mixed
+     */
     public function getImages()
     {
         $sources = [];
         $image_nodes = array_filter($this->nodes, function($node) {
-            return $node['type'] == 'img';
+            return $node['type'] == 'img' && isset($node['attributes']['src']);
         });
         foreach ($image_nodes as $node) {
-            if(isset($node['attributes']['src'])) {
-                $sources[] = $node['attributes']['src'];
-            }
+            $sources[] = $node['attributes']['src'];
         }
         return empty($sources) ? null : $sources;
     }

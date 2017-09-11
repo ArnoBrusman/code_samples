@@ -3,7 +3,7 @@
 namespace HtmlAnalyzer;
 
 /**
- * 
+ * An Html analyzer.
  */
 class Analyzer {
     
@@ -15,6 +15,11 @@ class Analyzer {
     // list taken from http://w3c.github.io/html/syntax.html#void-elements
     protected $void_elements = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'];
             
+    /**
+     * Analyze a given html string. Return a html Analysis object
+     * @param string $html
+     * @return \HtmlAnalyzer\Analysis
+     */
     function analyze($html) : Analysis {
         $this->errors = [];
         
